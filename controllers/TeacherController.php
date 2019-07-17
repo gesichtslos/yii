@@ -14,6 +14,7 @@ use yii\web\Controller;
 class TeacherController extends Controller
 {
     public function actionStudent(){
-        return $this->render('student');
+        $studentName = '%username%';
+        return $this->render('student', ['name'=>$studentName]);
     }
 }

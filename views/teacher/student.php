@@ -1,3 +1,3 @@
 <?php
 ?>
-<h1>Lorem ipsum dolor sit amet.</h1>
+<h1>Hello, <?=$name?>!</h1>
