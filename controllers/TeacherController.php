@@ -15,6 +15,6 @@ class TeacherController extends Controller
 {
     public function actionStudent(){
         $studentName = '%username%';
-        return $this->render('student', ['studentName'=>$studentName]);
+        return $this->render('student', ['name'=>$studentName]);
     }
 }

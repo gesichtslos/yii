@@ -1,3 +1,3 @@
 <?php
 ?>
-<h1>Hello, <?=$studentName?>!</h1>
+<h1>Hello, <?=$name?>!</h1>
