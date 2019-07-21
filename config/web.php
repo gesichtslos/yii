@@ -7,11 +7,22 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@images' => '@app/web/images',
+    ],
+    'modules' => [
+        'auth' => [
+            'class' => 'app\models\auth\Module',
+        ],
     ],
     'components' => [
+        'activity' => ['class' => \app\components\ActivityComponent::class,
+            'classEntity' => \app\models\Activity::class],
+        'day' => ['class' => \app\components\DayComponent::class,
+            'classEntity' => \app\models\Day::class],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'xyTASIHAp9svfpGcCdIW6cIu3p80HuDD',
@@ -61,14 +72,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 
