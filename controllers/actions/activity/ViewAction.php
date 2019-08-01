@@ -18,10 +18,14 @@ class ViewAction extends Action
     public function run($id)
     {
         $model = Activity::find()->andWhere(['id' => $id])->one();
-        if(!$model){
+        if (!$model) {
             throw new HttpException(404, 'Событие не найдено');
         }
 
-        return $this->controller->render('view', ['model'=>$model]);
+        if (!\Yii::$app->rbac->canEditViewActivity($model)) {
+            throw new HttpException(403, 'Недостаточно прав');
+        }
+
+        return $this->controller->render('view', ['model' => $model]);
     }
 }
