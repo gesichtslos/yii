@@ -55,8 +55,8 @@ class RbacComponent extends Component
         $authManager->addChild($admin, $user);
         $authManager->addChild($admin, $createViewAllActivity);
 
-        $authManager->assign($admin, 3);
-        $authManager->assign($user, 4);
+        $authManager->assign($admin, 1);
+        $authManager->assign($user, 2);
     }
 
     public function canCreateActivity()
