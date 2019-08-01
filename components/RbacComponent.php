@@ -10,6 +10,7 @@ namespace app\components;
 
 
 use app\models\Activity;
+use app\rules\OwnerActivityRule;
 use yii\base\Component;
 use yii\rbac\ManagerInterface;
 
