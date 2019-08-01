@@ -69,7 +69,7 @@ class RbacComponent extends Component
             return true;
         }
 
-        if (\Yii::$app->user->can(createViewOwnerActivity, ['activity' => $activity])) {
+        if (\Yii::$app->user->can('createViewOwnerActivity', ['activity' => $activity])) {
             return true;
         }
         return false;

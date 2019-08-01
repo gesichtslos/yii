@@ -72,4 +72,6 @@ class Activity extends ActivityBase
             'image' => 'Изображение'
         ];
     }
+
+
 }

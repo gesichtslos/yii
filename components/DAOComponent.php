@@ -73,7 +73,7 @@ class DAOComponent
             'repeatType' => $model->repeatType,
             'useNotification' => $model->useNotification,
             'user_id' => \Yii::$app->user->getId(),
-            'create_at' => date('Y-m-d H:i:s')])
+            'createAt' => date('Y-m-d H:i:s')])
             ->execute();
         $model->id = $this->getConnection()->lastInsertID;
     }
