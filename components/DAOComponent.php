@@ -52,10 +52,29 @@ class DAOComponent
                 ['title' => 'title' . mt_rand(100, 1000),
                     'user_id' => 1,
                     'dateStart' => date('Y-m-d')])->execute();
-           throw new Exception('');
+            throw new Exception('');
             $transaction->commit();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $transaction->rollBack();
         }
+    }
+
+    public function insertActivityIntoDb(&$model, $tableDb)
+    {
+        $this->getConnection()->createCommand()->insert($tableDb, [
+            'title' => $model->title,
+            'description' => $model->description,
+            'dateStart' => $model->dateStart,
+            'dateStart' => $model->dateEnd,
+            'isBlocked' => $model->isBlocked,
+            'email' => $model->email,
+            'isRepeatable' => $model->isRepeatable,
+            'isRepeatable' => $model->isRepeatable,
+            'repeatType' => $model->repeatType,
+            'useNotification' => $model->useNotification,
+            'user_id' => \Yii::$app->user->getId(),
+            'create_at' => date('Y-m-d H:i:s')])
+            ->execute();
+        $model->id = $this->getConnection()->lastInsertID;
     }
 }
