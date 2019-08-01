@@ -65,9 +65,14 @@ class RbacComponent extends Component
 
     public function canEditViewActivity(Activity $activity)
     {
-        if(\Yii::$app->user->can('createViewAllActivity')){
+        if (\Yii::$app->user->can('createViewAllActivity')) {
             return true;
         }
+
+        if (\Yii::$app->user->can(createViewOwnerActivity, ['activity' => $activity])) {
+            return true;
+        }
+        return false;
     }
 
 }
