@@ -12,6 +12,7 @@ namespace app\components;
 use app\models\Activity;
 use app\rules\OwnerActivityRule;
 use yii\base\Component;
+use yii\db\Query;
 use yii\rbac\ManagerInterface;
 
 class RbacComponent extends Component
@@ -73,6 +74,10 @@ class RbacComponent extends Component
             return true;
         }
         return false;
+    }
+
+    public function assignUserRole($user){
+        return \Yii::$app->dao->assignUserRole($user);
     }
 
 }

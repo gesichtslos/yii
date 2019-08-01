@@ -45,6 +45,7 @@ class AuthComponent extends Component
         $model->auth_key = $this->generateAuthKey();
 
         if ($model->save()) {
+            $role = \Yii::$app->rbac->assignUserRole($model); //куда её совать-то?
             return true;
         }
 

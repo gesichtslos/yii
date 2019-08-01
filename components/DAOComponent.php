@@ -77,4 +77,12 @@ class DAOComponent
             ->execute();
         $model->id = $this->getConnection()->lastInsertID;
     }
+
+    public function assignUserRole($user){
+        $query = new Query();
+        return $query->from('auth_assignment')
+            ->select('item_name')
+            ->andWhere(['user_id' => $user->id])
+            ->one($this->getConnection());
+    }
 }
