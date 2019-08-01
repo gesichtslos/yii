@@ -6,18 +6,18 @@ namespace app\models;
 use app\models\validations\TitleValidation;
 use yii\base\Model;
 
-class Activity extends Model
+class Activity extends ActivityBase
 {
-    public $title;
-    public $description;
-    public $dateStart;
-    public $dateEnd;
-    public $isBlocked;
-    public $isRepeatable;
-    public $repeatType;
-    public $email;
+//    public $title;
+//    public $description;
+//    public $dateStart;
+//    public $dateEnd;
+//    public $isBlocked;
+//    public $isRepeatable;
+//    public $repeatType;
+//    public $email;
     public $emailRepeat;
-    public $useNotification;
+//    public $useNotification;
     public $image;
 
     const REPEAT_TYPE = [

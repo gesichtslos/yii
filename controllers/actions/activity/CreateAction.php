@@ -5,6 +5,7 @@ namespace app\controllers\actions\activity;
 use app\components\ActivityComponent;
 use app\models\Activity;
 use yii\base\Action;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -14,6 +15,9 @@ class CreateAction extends Action
 
     public function run()
     {
+        if(!\Yii::$app->rbac->canCreateActivity()){
+            throw new HttpException(403, 'Недостаточно прав');
+        }
         $activityComponent = \Yii::createObject(['class' => ActivityComponent::class,
             'classEntity' => Activity::class]);
         $activity = $activityComponent->getEntity();

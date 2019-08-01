@@ -1,9 +1,9 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = file_exists(__DIR__.'/db_local.php')?
+$db = file_exists(__DIR__ . '/db_local.php') ?
     (require __DIR__ . '/db_local.php')
-    :(require __DIR__ . '/db.php');
+    : (require __DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic-console',
@@ -12,10 +12,13 @@ $config = [
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'authManager' => [
+            'class' => yii\rbac\DbManager::class
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

@@ -16,11 +16,14 @@ $config = [
         '@images' => '@app/web/images',
     ],
     'modules' => [
-        'auth' => [
+        'authm' => [
             'class' => 'app\models\auth\Module',
         ],
     ],
     'components' => [
+        'rbac' => ['class' => \app\components\RbacComponent::class],
+        'authManager' => ['class' => yii\rbac\DbManager::class],
+        'auth' => ['class' => \app\components\AuthComponent::class],
         'dao' => ['class' => \app\components\DAOComponent::class],
         'activity' => ['class' => \app\components\ActivityComponent::class,
             'classEntity' => \app\models\Activity::class],
@@ -34,7 +37,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
