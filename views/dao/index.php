@@ -2,23 +2,15 @@
 ?>
 <div class="row">
     <div class="col-md-6">
-        <pre><?php
-            print_r($users);
-            ?></pre>
+        <?=\app\widgets\DaoUserWidget\DaoUserWidget::widget(['user' => $users])?>
     </div>
     <div class="col-md-6">
-        <pre><?php
-            print_r($activity);
-            ?></pre>
+        <?=\app\widgets\DaoUserWidget\DaoUserWidget::widget(['user' => $activity])?>
     </div>
     <div class="col-md-6">
-        <pre><?php
-            print_r($act);
-            ?></pre>
+        <?=\app\widgets\DaoUserWidget\DaoUserWidget::widget(['user' => $act])?>
     </div>
     <div class="col-md-6">
-        <pre><?php
-            echo 'count ' . $count;
-            ?></pre>
+        <?=\app\widgets\DaoUserWidget\DaoUserWidget::widget(['user' => $count])?>
     </div>
 </div>

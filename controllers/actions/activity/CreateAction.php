@@ -31,7 +31,7 @@ class CreateAction extends Action
             }
 
             if (\Yii::$app->activity->createActivity($activity)) {
-                \Yii::$app->dao->insertActivityIntoDb($activity, $tableDb);
+
                 return $this->controller->redirect(['/activity/view', 'id' => $activity->id]);
             }
         }

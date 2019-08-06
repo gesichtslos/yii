@@ -3,6 +3,8 @@
 namespace app\models;
 
 
+use app\behaviors\DateCreatedBehavior;
+use app\behaviors\LogBehavior;
 use app\models\validations\TitleValidation;
 use yii\base\Model;
 
@@ -25,6 +27,14 @@ class Activity extends ActivityBase
         '1'=>'Раз в неделю'
     ];
 
+    public function behaviors()
+    {
+        return [
+            ['class'=>DateCreatedBehavior::class, 'attributeName' => 'createAt'],
+            LogBehavior::class
+        ];
+    }
+
     public function beforeValidate()
     {
         $date = \DateTime::createFromFormat('d.m.Y', $this->dateStart);
@@ -40,7 +50,7 @@ class Activity extends ActivityBase
 
     public function rules()
     {
-        return [
+        return array_merge([
             ['image', 'file', 'maxFiles' => 5, 'extensions' => ['jpg', 'jpeg', 'png', 'gif', 'bmp']],
             [['title', 'email'], 'trim'],
             [['title', 'dateEnd'], 'required'],
@@ -54,7 +64,7 @@ class Activity extends ActivityBase
             ['emailRepeat', 'compare', 'compareAttribute' => 'email', 'message' => 'Поля email не совпадают'],
             ['repeatType', 'in', 'range' => array_keys(self::REPEAT_TYPE)],
             ['title', TitleValidation::class, 'list' => ['admin']]
-        ];
+        ], parent::rules());
     }
 
     public function attributeLabels()

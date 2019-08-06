@@ -17,6 +17,7 @@ class ViewAction extends Action
 {
     public function run($id)
     {
+        \Yii::$app->logIt();
         $model = Activity::find()->andWhere(['id' => $id])->one();
         if (!$model) {
             throw new HttpException(404, 'Событие не найдено');

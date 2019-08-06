@@ -15,6 +15,7 @@ $config = [
         '@npm' => '@vendor/npm-asset',
         '@images' => '@app/web/images',
     ],
+    'as logIit' => ['class' => \app\behaviors\LogBehavior::class],
     'modules' => [
         'authm' => [
             'class' => 'app\models\auth\Module',
