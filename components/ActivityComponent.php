@@ -7,7 +7,6 @@ use app\behaviors\LogBehavior;
 use app\models\Activity;
 use yii\base\Component;
 use yii\helpers\FileHelper;
-use yii\web\HttpException;
 use yii\web\UploadedFile;
 
 class ActivityComponent extends Component
@@ -98,5 +97,12 @@ class ActivityComponent extends Component
     public function getNameTableDb()
     {
         return 'activity';
+    }
+
+    public function getCurrentActivityNotifications(): array
+    {
+        $result = Activity::find()->andWhere('dateStart >= :date', [':date' => date('Y-m-d')])->
+        andWhere(['useNotification' => 1])->all();
+        return $result;
     }
 }

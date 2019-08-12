@@ -2,6 +2,9 @@
 
 namespace app\components;
 
+use yii\caching\DbDependency;
+use yii\caching\ExpressionDependency;
+use yii\caching\TagDependency;
 use yii\db\Connection;
 use yii\db\Exception;
 use yii\db\Query;
@@ -16,7 +19,7 @@ class DAOComponent
     public function getUsers()
     {
         $sql = 'select * from users;';
-        return $this->getConnection()->createCommand($sql)->queryAll();
+        return $this->getConnection()->createCommand($sql)->cache(20, new DbDependency(['sql' => 'select max(id) from activity']))->queryAll();
     }
 
     public function getActivitiesUser($user_id)
@@ -27,12 +30,14 @@ class DAOComponent
 
     public function getFirstActivity()
     {
+        TagDependency::invalidate(\Yii::$app->cache, 'tag1');
         $query = new Query();
         return $query->from('activity')
             ->orderBy(['id' => SORT_DESC])
             ->select(['id', 'title'])
             ->andWhere(['useNotification' => 1])
             ->limit(3)
+            ->cache(20, new TagDependency(['tags' => 'tag1']))
             ->one($this->getConnection());
     }
 
@@ -41,6 +46,7 @@ class DAOComponent
         $query = new Query();
         return $query->from('activity')
             ->select('count(id)')
+            ->cache(20, new ExpressionDependency(['expression' => 'true']))
             ->scalar($this->getConnection());
     }
 
@@ -78,11 +84,18 @@ class DAOComponent
         $model->id = $this->getConnection()->lastInsertID;
     }
 
-    public function assignUserRole($user){
+    public function assignUserRole($user)
+    {
         $query = new Query();
         return $query->from('auth_assignment')
             ->select('item_name')
             ->andWhere(['user_id' => $user->id])
             ->one($this->getConnection());
+    }
+
+    public function getActivitiesReader()
+    {
+        $query = new Query();
+        return $query->from('activity')->createCommand()->query();
     }
 }

@@ -16,12 +16,15 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'activity' => ['class' => \app\components\ActivityComponent::class,
+            'classEntity' => \app\models\Activity::class],
         'authManager' => [
             'class' => yii\rbac\DbManager::class
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'db' => $db,
         'log' => [
             'targets' => [
                 [
@@ -30,7 +33,19 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'enableSwiftMailerLogging' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'geekbrains@golikov.dev',
+                'password' => '12345qwe',
+                'port' => '587',
+                'encryption' => 'tls'
+            ]
+        ],
     ],
     'params' => $params,
     /*
